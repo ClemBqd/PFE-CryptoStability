@@ -21,7 +21,7 @@ class WorldModel(Model):
 		# "Private parameters"
 		# These parameters will be used to communicate to the agents that 
 		# a new day or a new month started
-		self.daypassed = False
+		#self.daypassed = False
 		self.monthpassed = False
 
 		# Attributes related to time
@@ -69,7 +69,7 @@ class WorldModel(Model):
 		# Update the current_datetime
 		self.current_datetime += self.step_interval
 		# Check if a new day passed
-		self.time_tick(before_datetime)
+		#self.time_tick(before_datetime)
 
 		# Take the steps in the model
 		self.datacollector.collect(self)
