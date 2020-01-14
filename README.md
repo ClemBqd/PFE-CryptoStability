@@ -1,3 +1,5 @@
-# PFE-CryptoStability
+# Crypto Bank Rates Model
 
-* Stabilité d'une crypto: étudier sa volatilité
+### Notes :
+
+* Submit all commits to the branch develop.
