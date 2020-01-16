@@ -10,11 +10,11 @@ class Firm(FinanceAgent):
 	def __init__(self, unique_id, model):
 		super().__init__(unique_id, model)
 
-		self.salary_grid = [1200,1350,1500,1650,1800,2000,2300,2750,3600,5000] #Grid of salary
+		self.salary_grid = [1200,1350,1500,1650,1800,2000,2300,2750,3600,5000] #Grid of salary => maybe put out of __init__
 		self.salaries = {} # dictionary with as key numero of employe and as value salary
 		self.deposit = 10000
 		### To complete : constructor of class firm
-		self.efficiency = 1.4
+		self.efficiency = 1.4 
 		self.production = 0
 
 	def init(self, nb_emp):
@@ -26,7 +26,7 @@ class Firm(FinanceAgent):
 		list_unemployed = self.model.list_unemployed
 		for i in range(nb_emp):
 			if list_unemployed == []:
-				return i
+				return i 
 			emp_to_hire = random.randint(0,len(list_unemployed)-1)
 			self.salaries[list_unemployed[emp_to_hire]] = self.salary_grid[random.randint(0, 9)]
 			list_unemployed.pop(emp_to_hire)
@@ -51,7 +51,7 @@ class Firm(FinanceAgent):
 			self.liquidity -= salary
 			self.agents[emp].receive_salary(salary)
 			# Add the salary to the amount of production
-			self.production += efficiency * salary
+			self.production += self.efficiency * salary
 
 	def give_dividends(self):
 		"""

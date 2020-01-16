@@ -9,7 +9,7 @@ class Household(FinanceAgent):
 		super().__init__(unique_id, model)
 
 		# "Private" internal attributes
-		self.hours_worked_today = 0
+		# self.hours_worked_today = 0
 		self.hours_worked_this_month = 0
 
 		self.monthly_wage = 500 # Variable to store the amount received as wage this month

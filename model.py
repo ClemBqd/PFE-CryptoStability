@@ -23,7 +23,7 @@ class WorldModel(Model):
 		# "Private parameters"
 		# These parameters will be used to communicate to the agents that 
 		# a new day or a new month started
-		self.daypassed = False
+		# self.daypassed = False
 		self.monthpassed = False
 
 		# Attributes related to time
@@ -82,7 +82,7 @@ class WorldModel(Model):
 			self.scheduler.agents[i].init(will_hire)
 
 
-	def __getattr__(self, name):
+	def __getattribute__(self, name):
 		if name == "range_households":
 			# This function returns a list with 2 numbers : the number of the
 			# first household in the list, and the number of the last household in the list
@@ -114,7 +114,7 @@ class WorldModel(Model):
 			return unemployed
 
 		else:
-			super().__getattr__(name)
+			super().__getattribute__(name)
 
 
 	def time_tick(self, before_datetime):
