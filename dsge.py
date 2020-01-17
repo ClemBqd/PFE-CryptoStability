@@ -255,7 +255,7 @@ class RBC4(RBC3):
         
         eval_logged_contemporaneous = lambda log_contemp: self.eval_logged(log_steady_state, log_contemp)
         
-        return (-approx_fprime_cs(log_steady_state, eval_logged_contemporaneous))
+        return -approx_fprime_cs(log_steady_state, eval_logged_contemporaneous)
     
     def C(self):
         return np.r_[[0]*(self.k_variables-1), 1]
