@@ -33,7 +33,7 @@ class Household(Agent):
         '''
     def __init__(self, unique_id, model):
         super().__init__(unique_id,model)
-        self.type = "type"
+        self.type = "type" #Def risk profile here
         # self.capital = 0
         self.wage = 0 #salary month
         self.debt = 0

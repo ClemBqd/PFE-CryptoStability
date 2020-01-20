@@ -8,22 +8,29 @@ class BtcModel(Model):
 		Basic constructor with mostly default values
 
 		Parameters
-		n_agents : dict containing the number of each
-			type of agents that we want our model to include
-		"""
-        """
-        self.n_banks = n_agent['banks']
-        self.n_firms = n_agent['firms']
-        self.n_households = n_agent['households']
+		n_households : number of household in the model
     """
         # Chose a scheduler
         self.scheduler = RandomActivation(self)
 
         # Create  a bank, a firm and n household
         self.bank = Bank(1, self) 
+        self.schedule.add(self.bank)
         self.firm = Firm(2)
+        self.schedule.add(self.firm)
     
         for i in range(self.n_households):
-            # def proportion of risk here or in class household
+            
             h = Household(i+2, self.n_households)
-            self.scheduler.add(h)
+            self.scheduler.add(h) 
+
+        # Create datacollector here
+
+        def step(self):
+            # Tell all the agents in the model to run their step function
+            self.schedule.step()
+
+            # Collect data
+            # self.datacollector.collect(self)
+
+        
