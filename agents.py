@@ -44,7 +44,7 @@ class Household(Agent):
         self.happiness = 0 # To define
         self.speculator_portfolio = 0 
         
-        # Variable wich households hasn't impact on
+        # Variable wich households doesn't impact on
         ispe = 0 # Cours du bitcoin
         P = 0 #Find what that is -> related to risk_lovers
         rs = 0.1 #To define = %of savings
