@@ -20,11 +20,12 @@ class BtcModel(Model):
         self.schedule.add(self.firm)
     
         for i in range(self.n_households):
-            
             h = Household(i+2, self.n_households)
             self.scheduler.add(h) 
 
         # Create datacollector here
+
+        # Put variable comun of all the model too
 
         def step(self):
             # Tell all the agents in the model to run their step function
