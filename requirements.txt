@@ -1,1 +1,4 @@
-mesa==0.8.4
+matplotlib
+mesa
+numpy
+pandas
