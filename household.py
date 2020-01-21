@@ -1,74 +1,52 @@
-"""
-This file contains the definition of household.
-"""
-from financeAgent import FinanceAgent
-from support_classes import Loan
+from mesa import Agent
 
-class Household(FinanceAgent):
-	def __init__(self, unique_id, model):
-		super().__init__(unique_id, model)
+class Household(Agent):
+     '''
+         Create a new Household agent.
 
-		# "Private" internal attributes
-		self.hours_worked_today = 0
-		self.hours_worked_this_month = 0
-
-		self.monthly_wage = 500 # Variable to store the amount received as wage this month
-		self.n_adults = 1 #Number of adults capable of working in the household
-		self.deposit = 1000
-		self.price_of_life = 100 # Price of basic standard monthly consumption
-		self.consumption_rate = 0.8 # Proportion of the wage this household spends each month
-		#self.alpha1 = 0.6 # Propensity to consume out of income
-		#self.alpha2 = 0.4 # Propensity to consume out of wealth
+         Args:
+            unique_id: Unique identifier for the agent.
+        Type:    
+            agent_type: Indicator for the agent's type (risk_lover=1, risk_averse=-1, risk_neutral=0 )
+        '''
+    def __init__(self, unique_id, model, alpha=0.2, beta=0.8):
+        super().__init__(unique_id,model)
+        self.type = -1 #Def risk profile here
+        self.capital = 0
+        self.wage = 0 #salary month
+        self.debt = 0
+        self.savings = 0 
+        self.conso = 0
+        self.loan = 0
+        self.rate_loan = 0.1 
+        self.happiness = 0 # To define
+        self.speculator_portfolio = 0 
         
+        # Variable wich households doesn't impact on
+        ispe = 0 # Cours du bitcoin
+        P = 0 #Find what that is -> related to risk_lovers
+        rs = 0.1 #To define = %of savings
+        sp = 0.1 #To define = %of savings speculators
+        # self.bank ? 
 
-	def step(self):
-		"""
-		This function defines what a household will do on each
-		step
-		"""
-		# For now we consider that each household does exactly as many
-		# work hours as it expects every month.
-		#self.hours_worked_this_month = self.n_work_hours_expected
+    def savings(self):
+        if self.risk_profile == -1:
+            self.savings = (1 - rs)*self.savings + self.wage - self.conso
+        else:
+            self.savings = (1 - sp + rs)*self.savings + self.wage - self.conso + self.loan(1 + self.rate_loan)
+        return self.savings
 
-		self.monthly_consumption()
-		
-		if self.model.monthpassed:
-			# Receive salary
-			self.hours_worked_this_month = 0
+    def speculators_portfolio(self):
+        if risk_profile == 1:
+            self.speculator_portfolio = self.speculators_portfolio*(1 + ispe) + P*self.savings + self.loan
+        return self.speculator_portfolio
 
+    def consumption(self):
+        if self.type == -1:
+            self.conso = self.capital*self.savings*(self.happiness^(1-alpha))*(1 - alpha*beta)
+        else:
+            self.conso = self.capital*(self.savings + self.speculator_portfolio)*(self.happiness^(1-alpha))*(1 - alpha*beta)
 
-	def receive_salary(self, wage):
-		"""
-		A modifier
-		"""
-		self.deposit += wage
-		self.monthly_wage = wage
-
-	def monthly_consumption(self):
-		"""
-		Implements the daily needs of the household for things like food
-		and electricity.
-		"""
-		# For this first version we will consider only a fixed expenditure each month
-		# later on, we will need to connect the consumption of a household with the
-		# income of production firms.
-		consumption = self.monthly_wage * self.consumption_rate
-		# Our consumption has to come from somewhere, so we give some money to a random asortment
-		# of firms each months depending on our needs
-		### ATTENTION : this first version only functions with one firm
-		for i in self.model.range_firms:
-			self.deposit -= consumption
-			self.agents[i].liquidity += consumption
-			consumption = 0
-
-	def consumption(self) :
-		"""
-		Households consume out of their disposable income 
-		"""
-		self.disposable_income = self.deposit - self.price_of_life
-
-	def consumption_demand(self) :  
-		"""
-		Consumption goods demand by household
-		"""
-		self.consumptiond = self.alpha1 * self.disposable_income + self.alpha2 * self.deposit
+    def step(self, ispe):
+        
+        pass
