@@ -1,6 +1,8 @@
 from mesa import Agent, Model
 from mesa.time import RandomActivation
-from agents import *
+from household import *
+from bank import *
+from firm import * 
 
 class BtcModel(Model):
     def __init__(self, n_households):
