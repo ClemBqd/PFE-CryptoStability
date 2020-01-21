@@ -1,14 +1,9 @@
 from mesa import Agent
 
 class Firm(Agent):
-         '''
-         Create a new Firm agent.
-
-         Args:
-            unique_id: Unique identifier for the agent. put 2
-            growth factor ???
-        '''
     def __init__(self, unique_id, model):
+        self.unique_id = unique_id
+        super().__init__(unique_id,model)
         self.capital = self.random.randint(1000, 20000)
         self.production = 0
         self.wealth = 0 # = capital - debt

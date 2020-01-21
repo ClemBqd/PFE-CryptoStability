@@ -1,16 +1,9 @@
 from mesa import Agent
 
 class Household(Agent):
-     '''
-         Create a new Household agent.
-
-         Args:
-            unique_id: Unique identifier for the agent.
-        Type:    
-            agent_type: Indicator for the agent's type (risk_lover=1, risk_averse=-1, risk_neutral=0 )
-        '''
-    def __init__(self, unique_id, model, alpha=0.2, beta=0.8):
-        super().__init__(unique_id,model)
+    def __init__(self, unique_id, model):
+        self.unique_id = unique_id
+        super().__init__(unique_id, model)
         self.type = -1 #Def risk profile here
         self.capital = 0
         self.wage = 0 #salary month
